@@ -12,15 +12,21 @@ import {
 import constants from "../../data/constants";
 import SliderA from "./SliderA";
 import SliderB from "./SliderB";
+import SliderC from "./SliderC";
+import SliderD from "./SliderD";
 const { width, height } = Dimensions.get("window");
 
 function Walkthrough(props) {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [sliderbAnimated, setSliderbAnimated] = useState(false);
+  const [slidercAnimated, setSlidercAnimated] = useState(false);
+  const [sliderdAnimated, setSliderdAnimated] = useState(false);
 
   const onViewChangeRef = useRef(({ viewableItems, changed }) => {
     if (viewableItems[0].index == 1) {
       setSliderbAnimated(true);
+      setSlidercAnimated(true);
+      setSliderdAnimated(true);
     }
   });
 
@@ -84,6 +90,8 @@ function Walkthrough(props) {
               <View style={{ flex: 1, justifyContent: "center" }}>
                 {index === 0 && <SliderA />}
                 {index === 1 && <SliderB animate={sliderbAnimated} />}
+                {index === 2 && <SliderC animate={slidercAnimated} />}
+                {index === 3 && <SliderD animate={sliderdAnimated} />}
               </View>
 
               {/* title */}
