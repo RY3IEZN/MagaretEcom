@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   TouchableOpacity,
   View,
@@ -11,10 +11,18 @@ import {
 } from "react-native";
 import constants from "../../data/constants";
 import SliderA from "./SliderA";
+import SliderB from "./SliderB";
 const { width, height } = Dimensions.get("window");
 
 function Walkthrough(props) {
   const scrollX = useRef(new Animated.Value(0)).current;
+  const [sliderbAnimated, setSliderbAnimated] = useState(false);
+
+  const onViewChangeRef = useRef(({ viewableItems, changed }) => {
+    if (viewableItems[0].index == 1) {
+      setSliderbAnimated(true);
+    }
+  });
 
   const Dots = () => {
     const dotsPosition = Animated.divide(scrollX, width);
@@ -60,6 +68,7 @@ function Walkthrough(props) {
         decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
+        onViewableItemsChanged={onViewChangeRef.current}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: false }
@@ -74,6 +83,7 @@ function Walkthrough(props) {
             >
               <View style={{ flex: 1, justifyContent: "center" }}>
                 {index === 0 && <SliderA />}
+                {index === 1 && <SliderB animate={sliderbAnimated} />}
               </View>
 
               {/* title */}
