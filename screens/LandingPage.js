@@ -3,7 +3,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 
-function LandingPage(props) {
+function LandingPage({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={{ marginHorizontal: 120, paddingTop: 300 }}>
@@ -16,7 +16,10 @@ function LandingPage(props) {
         <Text style={styles.titleText}>Welcome to</Text>
         <Text style={styles.titleText}>Magaret</Text>
       </View>
-      <TouchableOpacity style={styles.startBtn}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Walkthrough")}
+        style={styles.startBtn}
+      >
         <Text style={styles.startText}>Get Started</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.already}>
